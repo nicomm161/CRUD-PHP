@@ -25,23 +25,23 @@ class Productos {
                 echo "<button><a href='../../views/auth/shop.php'>Volver a la tienda</a></button> ";
             } else {
                 echo "Error al modificar usuario: " . $conex->error;
-                echo "<button><a href='../cliente.php'>Volver</a></button> ";
+                echo "<button><a href='../../views/auth/shop.php'>Volver a la tienda</a></button> ";
             }
         } catch (Exception $e) {
             echo "Error: " . $e->getMessage() . "<br>";
             echo "<button><a href='../../views/auth/shop.php'>Volver a la tienda</a></button>";
         }
     }
-    public function registrarProducto($nombre, $precio, $cantidad, $password) {
+    public function registrarProducto($nombre, $precio, $cantidad) {
         global $conex;
 
         
         $insertar_producto = "INSERT INTO animales(nombre, precio, cantidad) VALUES ('$nombre','$precio','$cantidad')";
     
         try {
-            if ($conex->query($insertar_registro_user) === TRUE) {
+            if ($conex->query($insertar_producto) === TRUE) {
                 echo "Animal añadido con éxito" . htmlspecialchars($nombre) . "<br>";
-                echo "<button><a href='../cliente.php'>Volver</a></button> ";
+                echo "<button><a href='../../views/auth/shop.php'>Volver a la tienda</a></button> ";
             } else {
                 echo "Error al registrar usuario: <br>" . $conex->error;
                 echo "<button><a href='../../views/auth/shop.php'>Volver a la tienda</a></button>";
@@ -70,6 +70,21 @@ class Productos {
             echo "<button><a href='../../views/auth/shop.php'>Volver a la tienda</a></button>";
         }
 }
+
+    public function devolverProductos() {
+        global $conex;
+
+        $consulta = "SELECT * FROM animales";
+        $resultado = $conex->query($consulta);
+
+        if ($resultado->num_rows > 0) {
+            while ($fila = $resultado->fetch_assoc()) {
+                echo "Nombre: " . $fila["nombre"] . " Precio: " . $fila["precio"] . " Cantidad: " . $fila["cantidad"] . "<br>";
+            }
+        } else {
+            echo "No hay animales en la tienda";
+        }
+    }
 
 }
 

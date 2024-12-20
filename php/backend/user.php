@@ -40,6 +40,22 @@ class Admin extends Usuario {
         }
     }
 
+    function quitarPrivilegios($user) {
+        global $conex;
+        $privilegio = "cliente";
+
+        $quitar_privilegios = "UPDATE usuarios SET privilegios = '$privilegio' WHERE user = '$user'";
+        try {
+            if ($conex->query($quitar_privilegios) === TRUE) {
+                echo "Privilegios eliminados";
+            } else {
+                echo "Error al quitar privilegios: " . $conex->error;
+            }
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
     function bloquearUser($user) {
         global $conex;
         $estado = "bloqueado";
@@ -54,6 +70,41 @@ class Admin extends Usuario {
             }
         } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
+        }
+    }
+
+    function desbloquearUser($user) {
+        global $conex;
+        $estado = "activo";
+
+        $desbloquear = "UPDATE usuarios SET estado = '$estado' WHERE user = '$user'";
+        try {
+            if ($conex->query($desbloquear) === TRUE) {
+                echo "Desbloqueo exitoso";
+            } else {
+                echo "Error al desbloquear usuario: " . $conex->error;
+            }
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+    public function devolverUsuarios() {
+        global $conex;
+        $usuarios = "SELECT * FROM usuarios";
+        $consulta = $conex->query($usuarios);
+        if ($consulta->num_rows > 0) {
+            while ($row = $consulta->fetch_assoc()) {
+                echo "Nombre: " . $row['nombre'] . "<br>";
+                echo "Apellido: " . $row['apellido'] . "<br>";
+                echo "Usuario: " . $row['user'] . "<br>";
+                echo "Dinero: " . $row['dinero'] . "<br>";
+                echo "Privilegios: " . $row['privilegios'] . "<br>";
+                echo "Estado: " . $row['estado'] . "<br>";
+                echo "<br>";
+            }
+        } else {
+            echo "No hay usuarios";
         }
     }
 
@@ -161,6 +212,22 @@ class Cliente extends Usuario{
         } catch (Exception $e) {
             echo "Error: " . $e->getMessage() . "<br>";
             echo "<button><a href='../../views/client/client_panel.php'>Volver</a></button> ";
+        }
+    }
+
+    public function devolverValoraciones(){
+        global $conex;
+        $valoraciones = "SELECT * FROM valoraciones";
+        $consulta = $conex->query($valoraciones);
+        if ($consulta->num_rows > 0) {
+            while ($row = $consulta->fetch_assoc()) {
+                echo "Usuario: " . $row['user'] . "<br>";
+                echo "Valoracion: " . $row['valoracion'] . "<br>";
+                echo "Comentario: " . $row['comentario'] . "<br>";
+                echo "<br>";
+            }
+        } else {
+            echo "No hay valoraciones";
         }
     }
 }
