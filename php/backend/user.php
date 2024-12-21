@@ -260,17 +260,27 @@ class Cliente extends Usuario{
         $valoraciones = "SELECT * FROM valoraciones";
         $consulta = $conex->query($valoraciones);
         if ($consulta->num_rows > 0) {
+            echo "<div class='container mt-5'>";
+            echo "<h2 class='text-center mb-4'>Valoraciones de Usuarios</h2>";
+            echo "<div class='row'>";
             while ($row = $consulta->fetch_assoc()) {
-                echo "Usuario: " . $row['user'] . "<br>";
-                echo "Valoracion: " . $row['valoracion'] . "<br>";
-                echo "Comentario: " . $row['comentario'] . "<br>";
-                echo "<br>";
+                echo "<div class='col-md-4 mb-3'>";
+                echo "<div class='card'>";
+                echo "<div class='card-body'>";
+                echo "<h5 class='card-title'>Usuario: " . htmlspecialchars($row['user']) . "</h5>";
+                echo "<h6 class='card-subtitle mb-2 text-muted'>Valoración: " . htmlspecialchars($row['valoracion']) . "</h6>";
+                echo "<p class='card-text'>Comentario: " . htmlspecialchars($row['comentario']) . "</p>";
+                echo "</div>";
+                echo "</div>";
+                echo "</div>";
             }
+            echo "</div>";
+            echo "</div>";
         } else {
-            echo "No hay valoraciones";
+            echo "<div class='alert alert-info text-center mt-5'>No hay valoraciones</div>";
         }
     }
-}
+}    
 
 
 ?>
