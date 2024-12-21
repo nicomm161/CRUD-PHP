@@ -142,7 +142,7 @@ class Admin extends Usuario {
             echo "</tbody>";
             echo "</table>";
 
-            echo "<button><a href = '../../views/auth/shop.php'>Gestionar tienda </a></button>";
+            echo "<button><a href = '../../views/auth/shopAdmin.php'>Gestionar tienda</a></button>";
         } else {
             echo "No hay usuarios";
             echo "<button><a href='../../views/admin/admin_panel.php'>Volver</a></button>";

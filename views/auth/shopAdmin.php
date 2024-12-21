@@ -4,20 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../assets/css/bootstrap-grid.min.css">
-    <title>Administrador</title>
+    <title>Tienda</title>
 </head>
 <body>
-    <h1>Panel de administrador</h1>
+    
+    <h2>Gestión de animales en la tienda</h2>
     <?php
-    
-    include("../../php/backend/user.php");
     include("../../php/backend/product.php");
-
-    $admin = new Admin("","","","",0);
-
-    $admin->devolverUsuarios();
-    
+    $producto = new Productos("", 0, 0);
+    $producto->animalesAdmin();
     ?>
+
+    <p><a href="../admin/admin_panel.php">Volver a la zona administrador</a></p>
+    <p><a href="shop.php">Mirar tienda de cliente</a></p>
     <script src="../../assets/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

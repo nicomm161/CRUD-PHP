@@ -18,7 +18,7 @@
     </form>
 
     
-
+    <p><a href="shop.php">Volver a la tienda</a></p>
     <p><a href="../client/client_panel.php">Volver a la zona cliente</a></p>
     
 

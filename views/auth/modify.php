@@ -19,6 +19,7 @@
     </form>
 
     <p><a href="../client/client_panel.php">Volver a la zona cliente</a></p>
+    <p><a href="shop.php">Volver a la tienda</a></p>
     <script src="../../assets/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

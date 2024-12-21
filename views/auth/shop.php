@@ -8,10 +8,10 @@
 </head>
 <body>
     <h1>Bienvenido a la tienda de animales</h1>
-    <p><a href="../auth/register.php">Registrarte</a></p>
-    <p><a href="../auth/login.php">Login</a></p>
-    <p><a href="../auth/modify.php">Modificar tu usuario</a></p>
-    
+    <p><a href="register.php">Registrarte</a></p>
+    <p><a href="login.php">Login</a></p>
+    <p><a href="modify.php">Modificar tu usuario</a></p>
+    <p><a href="../client/client_panel.php">Zona cliente</a></p>
     
     <h2>Animales en la tienda</h2>
     <?php
