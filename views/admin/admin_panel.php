@@ -7,9 +7,21 @@
     <title>Administrador</title>
 </head>
 <body>
-    <p><a href="../auth/block.php">Bloquear Usuario</a></p> <br>
-    <p> <a href="../auth/modify_privileges.php">Modificar privilegios</a></p> <br>
-    <p><a href="../auth/shop.php">Tienda</a></p>
+    <h1>Panel de administrador</h1>
+    <?php
+    
+    include("../../php/backend/user.php");
+    include("../../php/backend/product.php");
+
+    $admin = new Admin("","","","",0);
+
+    $admin->devolverUsuarios();
+
+
+    
+    
+    
+    ?>
     <script src="../../assets/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

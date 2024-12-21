@@ -7,6 +7,7 @@
     <title>Tienda</title>
 </head>
 <body>
+    
     <button type="submit"><a href="../client/client_panel.php">Cliente</a></button> <br>
     <button type="submit"><a href="../admin/admin_panel.php">Admin</a></button>
     <p><a href="../auth/shop.php">Tienda</a></p>

@@ -31,25 +31,28 @@ class Admin extends Usuario {
 
         try {
             if ($conex->query($privilegios_user) === TRUE) {
-                echo "Subiste a admin a este usuario";
+                echo "Subiste a admin a " . htmlspecialchars($user) . "! <br>";
+                echo "<button><a href='../../views/admin/admin_panel.php'>Volver</a></button>";
             } else {
-                echo "Error al actualizar privilegios: " . $conex->error;
+                echo "Error al actualizar privilegios: " . $conex->error . "<br>";
+                echo "<button><a href='../../views/admin/admin_panel.php'>Volver</a></button>";
             }
         } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
+            echo "<button><a href='../../views/admin/admin_panel.php'>Volver</a></button>";
         }
     }
 
     function quitarPrivilegios($user) {
         global $conex;
-        $privilegio = "cliente";
+        $privilegio = "user";
 
         $quitar_privilegios = "UPDATE usuarios SET privilegios = '$privilegio' WHERE user = '$user'";
         try {
             if ($conex->query($quitar_privilegios) === TRUE) {
-                echo "Privilegios eliminados";
+                echo "Privilegios degradados a " . htmlspecialchars($user) . "! <br>";
             } else {
-                echo "Error al quitar privilegios: " . $conex->error;
+                echo "Error al quitar privilegios: " . $conex->error . "<br>";
             }
         } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
@@ -64,12 +67,15 @@ class Admin extends Usuario {
 
         try {
             if ($conex->query($bloquear_user) === TRUE) {
-                echo "Bloqueo exitoso";
+                echo "Bloqueo exitoso a " . htmlspecialchars($user) . "! <br>";
+                echo "<button><a href='../../views/admin/admin_panel.php'>Volver</a></button>";
             } else {
-                echo "Error al bloquear usuario: " . $conex->error;
+                echo "Error al bloquear usuario: " . $conex->error . "<br>";
+                echo "<button><a href='../../views/admin/admin_panel.php'>Volver</a></button>";
             }
         } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
+            echo "<button><a href='../../views/admin/admin_panel.php'>Volver</a></button>";
         }
     }
 
@@ -80,31 +86,66 @@ class Admin extends Usuario {
         $desbloquear = "UPDATE usuarios SET estado = '$estado' WHERE user = '$user'";
         try {
             if ($conex->query($desbloquear) === TRUE) {
-                echo "Desbloqueo exitoso";
+                echo "Desbloqueo exitoso a " . htmlspecialchars($user) . "! <br>";
+                echo "<button><a href='../../views/admin/admin_panel.php'>Volver</a></button>";
             } else {
-                echo "Error al desbloquear usuario: " . $conex->error;
+                echo "Error al desbloquear usuario: " . $conex->error . "<br>";
+                echo "<button><a href='../../views/admin/admin_panel.php'>Volver</a></button>";
+
             }
         } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
+            echo "<button><a href='../../views/admin/admin_panel.php'>Volver</a></button>";
         }
     }
 
     public function devolverUsuarios() {
         global $conex;
+
+
         $usuarios = "SELECT * FROM usuarios";
+
+
         $consulta = $conex->query($usuarios);
         if ($consulta->num_rows > 0) {
+            echo "<table border='1'>";
+            echo "<thead>";
+            echo "<tr>";
+            echo "<th>Nombre</th>";
+            echo "<th>Apellido</th>";
+            echo "<th>Usuario</th>";
+            echo "<th>Estado</th>";
+            echo "<th>Privilegios</th>";
+            echo "<th>Dinero</th>";
+            echo "<th>Bloquear usuario</th>";
+            echo "<th>Desbloquear usuario</th>";
+            echo "<th>Agregar privilegios</th>";
+            echo "<th>Degradar privilegios</th>";
+            echo "</tr>";
+            echo "</thead>";
+            
+            echo "<tbody>";
             while ($row = $consulta->fetch_assoc()) {
-                echo "Nombre: " . $row['nombre'] . "<br>";
-                echo "Apellido: " . $row['apellido'] . "<br>";
-                echo "Usuario: " . $row['user'] . "<br>";
-                echo "Dinero: " . $row['dinero'] . "<br>";
-                echo "Privilegios: " . $row['privilegios'] . "<br>";
-                echo "Estado: " . $row['estado'] . "<br>";
-                echo "<br>";
+                echo "<tr>";
+                echo "<td>" . htmlspecialchars($row["nombre"]) . "</td>";
+                echo "<td>" . htmlspecialchars($row["apellido"]) . "</td>";
+                echo "<td>" . htmlspecialchars($row["user"]) . "</td>";
+                echo "<td>" . htmlspecialchars($row["estado"]) . "</td>";
+                echo "<td>" . htmlspecialchars($row["privilegios"]) . "</td>";
+                echo "<td>" . htmlspecialchars($row["dinero"]) . "€" ."</td>";
+                echo "<td><button><a href = '../../views/auth/block.php'> Bloquear </a></button></td>";
+                echo "<td><button><a href = '../../views/auth/unblock.php'> Desbloquear </a></button></td>";
+                echo "<td><button><a href = '../../views/auth/modify_privileges.php'> Agregar </a></button></td>";
+                echo "<td><button><a href = '../../views/auth/downgrade-privileges.php'> Degradar </a></button></td>";
+                echo "</tr>";
             }
+            echo "</tbody>";
+            echo "</table>";
+
+            echo "<button><a href = '../../views/auth/shop.php'>Gestionar tienda </a></button>";
         } else {
             echo "No hay usuarios";
+            echo "<button><a href='../../views/admin/admin_panel.php'>Volver</a></button>";
         }
     }
 
@@ -132,7 +173,7 @@ class Cliente extends Usuario{
                 echo "Contraseña cambiada con exito " . htmlspecialchars($user) . "!" . "<br>";
                 echo "<button><a href='../../views/client/client_panel.php'>Volver</a></button> ";
             } else {
-                echo "Error al modificar usuario: " . $conex->error;
+                echo "Error al modificar usuario: " . $conex->error . "<br>";
                 echo "<button><a href='../../views/client/client_panel.php'>Volver</a></button>";
             }
         } catch (Exception $e) {
@@ -154,7 +195,7 @@ class Cliente extends Usuario{
                 echo "¡Gracias por registrarse, " . htmlspecialchars($user) . "!" . "<br>";
                 echo "<button><a href='../../views/client/client_panel.php'>Volver</a></button> ";
             } else {
-                echo "Error al registrar usuario: <br>" . $conex->error;
+                echo "Error al registrar usuario: <br>" . $conex->error . "<br>";
                 echo "<button><a href='../../views/client/client_panel.php'>Volver</a></button> ";
             }
         } catch (Exception $e) {
@@ -187,11 +228,11 @@ class Cliente extends Usuario{
                 echo "¡Gracias por iniciar sesión, " . htmlspecialchars($user) . "! <br>";
                 echo "<button><a href='../../views/client/client_panel.php'>Volver</a></button> ";
             } else {
-                echo "Contraseña incorrecta, vuelve a intentarlo";
+                echo "Contraseña incorrecta, vuelve a intentarlo" . "<br>";
                 echo "<button><a href='../../views/client/client_panel.php'>Volver</a></button>";
             }
         } else {
-            echo "No se encontró el usuario, regístrate";
+            echo "No se encontró el usuario, regístrate" . "<br>";
             echo "<button><a href='../../views/client/client_panel.php'>Volver</a></button>";
         }
     }
@@ -206,7 +247,7 @@ class Cliente extends Usuario{
                 echo "Valoracion exitosa <br>";
                 echo "<button><a href='../../views/client/client_panel.php'>Volver</a></button> ";
             } else {
-                echo "Tu usuario no existe: <br>" . $conex->error;
+                echo "Tu usuario no existe: " . $conex->error . "<br>";
                 echo "<button><a href='../../views/client/client_panel.php'>Volver</a></button> ";
             }
         } catch (Exception $e) {

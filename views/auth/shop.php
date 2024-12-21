@@ -11,17 +11,15 @@
     <p><a href="../auth/register.php">Registrarte</a></p>
     <p><a href="../auth/login.php">Login</a></p>
     <p><a href="../auth/modify.php">Modificar tu usuario</a></p>
-    <p><a href="../auth/valoration.php">Añade tu valoracion web</a></p>
-    <p><a href="../auth/modify-product.php">Modificar animal</a></p>
-    <p><a href="../auth/register-product.php">Agregar animal</a></p>
-    <p><a href="../auth/delete-product.php">Eliminar animal</a></p>
+    
     
     <h2>Animales en la tienda</h2>
     <?php
     include("../../php/backend/product.php");
     $producto = new Productos("", 0, 0);
-    $producto->devolverProductos();
+    $producto->animalesCliente();
     ?>
+
 
 
     <h2>Nuestras valoraciones</h2>
@@ -31,7 +29,7 @@
     $valoraciones->devolverValoraciones();
     
     ?>
-
+    <p><a href="../auth/valoration.php">Añade tu valoracion web</a></p>
     <script src="../../assets/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
