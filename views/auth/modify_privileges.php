@@ -9,7 +9,7 @@
 <body class="bg-light">
     <div class="container mt-5">
         <h1 class="text-center mb-4">Agregar Privilegios</h1>
-        <form action="../../php/data/modificar-user.php" method="post" class="bg-white p-4 rounded shadow-sm">
+        <form action="../../php/data/privilegios-user.php" method="post" class="bg-white p-4 rounded shadow-sm">
             <fieldset>
                 <legend class="mb-3">Agregar Privilegios</legend>
                 <div class="mb-3">
@@ -25,7 +25,6 @@
         </form>
         <div class="d-flex justify-content-center mt-4">
             <a href="../admin/admin_panel.php" class="btn btn-secondary me-2">Volver a la zona administrador</a>
-            <a href="shop.php" class="btn btn-secondary">Volver a la tienda</a>
         </div>
     </div>
     <script src="../../assets/js/bootstrap.bundle.min.js"></script>

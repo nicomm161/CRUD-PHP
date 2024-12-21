@@ -101,15 +101,13 @@ class Admin extends Usuario {
 
     public function devolverUsuarios() {
         global $conex;
-
-
+    
         $usuarios = "SELECT * FROM usuarios";
-
-
+    
         $consulta = $conex->query($usuarios);
         if ($consulta->num_rows > 0) {
-            echo "<table border='1'>";
-            echo "<thead>";
+            echo "<table class='table table-striped table-bordered table-hover'>";
+            echo "<thead class='thead-dark'>";
             echo "<tr>";
             echo "<th>Nombre</th>";
             echo "<th>Apellido</th>";
@@ -132,22 +130,23 @@ class Admin extends Usuario {
                 echo "<td>" . htmlspecialchars($row["user"]) . "</td>";
                 echo "<td>" . htmlspecialchars($row["estado"]) . "</td>";
                 echo "<td>" . htmlspecialchars($row["privilegios"]) . "</td>";
-                echo "<td>" . htmlspecialchars($row["dinero"]) . "€" ."</td>";
-                echo "<td><button><a href = '../../views/auth/block.php'> Bloquear </a></button></td>";
-                echo "<td><button><a href = '../../views/auth/unblock.php'> Desbloquear </a></button></td>";
-                echo "<td><button><a href = '../../views/auth/modify_privileges.php'> Agregar </a></button></td>";
-                echo "<td><button><a href = '../../views/auth/downgrade-privileges.php'> Degradar </a></button></td>";
+                echo "<td>" . htmlspecialchars($row["dinero"]) . "€" . "</td>";
+                echo "<td><a href='../../views/auth/block.php' class='btn btn-danger'>Bloquear</a></td>";
+                echo "<td><a href='../../views/auth/unblock.php' class='btn btn-success'>Desbloquear</a></td>";
+                echo "<td><a href='../../views/auth/modify_privileges.php' class='btn btn-primary'>Agregar</a></td>";
+                echo "<td><a href='../../views/auth/downgrade-privileges.php' class='btn btn-warning'>Degradar</a></td>";
                 echo "</tr>";
             }
             echo "</tbody>";
             echo "</table>";
-
-            echo "<button><a href = '../../views/auth/shopAdmin.php'>Gestionar tienda</a></button>";
+    
+            echo "<button class='btn btn-primary mt-3'><a href='../../views/auth/shopAdmin.php' class='text-white' style='text-decoration: none;'>Gestionar tienda</a></button>";
         } else {
-            echo "No hay usuarios";
-            echo "<button><a href='../../views/admin/admin_panel.php'>Volver</a></button>";
+            echo "<div class='alert alert-info'>No hay usuarios</div>";
+            echo "<button class='btn btn-secondary mt-3'><a href='../../views/admin/admin_panel.php' class='text-white' style='text-decoration: none;'>Volver</a></button>";
         }
     }
+    
 
 
 }

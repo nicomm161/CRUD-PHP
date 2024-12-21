@@ -22,8 +22,6 @@
         </form>
         <div class="d-flex justify-content-center mt-4">
             <a href="../admin/admin_panel.php" class="btn btn-secondary me-2">Volver a la zona de administrador</a>
-            <a href="shopAdmin.php" class="btn btn-secondary me-2">Ir a la tienda administrador</a>
-            <a href="shop.php" class="btn btn-secondary">Ir a la tienda cliente</a>
         </div>
     </div>
     <script src="../../assets/js/bootstrap.bundle.min.js"></script>
