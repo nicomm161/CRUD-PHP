@@ -3,26 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../assets/css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
     <title>Login</title>
 </head>
-<body>
-
-    <form action="../../php/data/login-user.php" method="post">
-        <fieldset>
-            <legend>Login</legend>
-            <input type="text" name="user" placeholder="User"><br>
-            <input type="password" name="password" placeholder="Password"><br>
-            <div class="recordar-sesion">
-                <input type="checkbox" name = "checkbox">
-                <label for="checkbox"> ¿Quieres recordar sesión?</label>
-            </div>
-            <input type="submit" value="Login">
-        </fieldset>
-    </form>
-
-    <p><a href="../client/client_panel.php">Volver a la zona cliente</a></p>
-    <p><a href="shop.php">Volver a la tienda</a></p>
+<body class="bg-light">
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Login</h1>
+        <form action="../../php/data/login-user.php" method="post" class="bg-white p-4 rounded shadow-sm">
+            <fieldset>
+                <legend class="mb-3">Login</legend>
+                <div class="mb-3">
+                    <input type="text" name="user" class="form-control" placeholder="User">
+                </div>
+                <div class="mb-3">
+                    <input type="password" name="password" class="form-control" placeholder="Password">
+                </div>
+                <div class="form-check mb-3">
+                    <input type="checkbox" name="checkbox" class="form-check-input" id="checkbox">
+                    <label for="checkbox" class="form-check-label">¿Quieres recordar sesión?</label>
+                </div>
+                <div class="d-grid">
+                    <input type="submit" value="Login" class="btn btn-primary">
+                </div>
+            </fieldset>
+        </form>
+        <div class="d-flex justify-content-center mt-4">
+            <a href="../client/client_panel.php" class="btn btn-secondary me-2">Volver a la zona cliente</a>
+            <a href="shop.php" class="btn btn-secondary">Volver a la tienda</a>
+        </div>
+    </div>
     <script src="../../assets/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

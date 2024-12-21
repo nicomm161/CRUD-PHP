@@ -3,21 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../assets/css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
     <title>Borrar producto</title>
 </head>
-<body>
-    <form action="../../php/data/borrar-producto.php" method="post">
-        <fieldset>
-        <legend>Borrar animal</legend>
-            <input type="text" name="nombre" placeholder="Nombre"> <br>
-            <input type="submit" value="Eliminar">
-        </fieldset>
-    </form>
-
-    <p><a href="../admin/admin_panel.php">Volver a la zona de administrador</a></p>
-    <p><a href="shopAdmin.php">Ir a la tienda administrador</a></p>
-    <p><a href="shop.php">Ir a la tienda cliente</a></p>
+<body class="bg-light">
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Borrar Animal</h1>
+        <form action="../../php/data/borrar-producto.php" method="post" class="bg-white p-4 rounded shadow-sm">
+            <fieldset>
+                <legend class="mb-3">Borrar Animal</legend>
+                <div class="mb-3">
+                    <input type="text" name="nombre" class="form-control" placeholder="Nombre">
+                </div>
+                <div class="d-grid">
+                    <input type="submit" value="Eliminar" class="btn btn-danger">
+                </div>
+            </fieldset>
+        </form>
+        <div class="d-flex justify-content-center mt-4">
+            <a href="../admin/admin_panel.php" class="btn btn-secondary me-2">Volver a la zona de administrador</a>
+            <a href="shopAdmin.php" class="btn btn-secondary me-2">Ir a la tienda administrador</a>
+            <a href="shop.php" class="btn btn-secondary">Ir a la tienda cliente</a>
+        </div>
+    </div>
     <script src="../../assets/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
