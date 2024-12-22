@@ -4,19 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
-    <title>Borrar producto</title>
+    <link rel="shortcut icon" href="../../assets/images/favicon.png" type="image/png">
+    <title>Registrar producto</title>
 </head>
 <body class="bg-light">
     <div class="container mt-5">
-        <h1 class="text-center mb-4">Borrar Animal</h1>
-        <form action="../../php/data/borrar-producto.php" method="post" class="bg-white p-4 rounded shadow-sm">
+        <h1 class="text-center mb-4">Registrar Animal</h1>
+        <form action="../../php/data/registrar-producto.php" method="post" class="bg-white p-4 rounded shadow-sm">
             <fieldset>
-                <legend class="mb-3">Borrar Animal</legend>
+                <legend class="mb-3">Registrar Animal</legend>
                 <div class="mb-3">
                     <input type="text" name="nombre" class="form-control" placeholder="Nombre">
                 </div>
+                <div class="mb-3">
+                    <input type="text" name="precio" class="form-control" placeholder="Precio">
+                </div>
+                <div class="mb-3">
+                    <input type="text" name="cantidad" class="form-control" placeholder="Cantidad">
+                </div>
                 <div class="d-grid">
-                    <input type="submit" value="Eliminar" class="btn btn-danger">
+                    <input type="submit" value="Registrar" class="btn btn-primary">
                 </div>
             </fieldset>
         </form>

@@ -97,14 +97,14 @@ public function animalesAdmin() {
             echo "<td>" . htmlspecialchars($fila["precio"]) . "€" . "</td>";
             echo "<td>" . htmlspecialchars($fila["cantidad"]) . "</td>";
             echo "<td><img src='" . htmlspecialchars($fila["imagenes"]) . "' alt='" . htmlspecialchars($fila["nombre"]) . "' class='img-fluid' style='width: 100px; height: 100px; object-fit: contain;'></td>";
-            echo "<td><a href='../../views/auth/modify-product.php' class='btn btn-primary'>Modificar</a></td>";
-            echo "<td><a href='../../views/auth/delete-product.php' class='btn btn-danger'>Eliminar</a></td>";
+            echo "<td><a href='../../views/auth/modify-product.html' class='btn btn-primary'>Modificar</a></td>";
+            echo "<td><a href='../../views/auth/delete-product.html' class='btn btn-danger'>Eliminar</a></td>";
             echo "</tr>";
         }
         echo "</tbody>";
         echo "</table>";
         
-        echo "<button class='btn btn-success mt-3'><a href='../../views/auth/register-product.php' class='text-white' style='text-decoration: none;'>Agregar animal a la tabla</a></button>";
+        echo "<button class='btn btn-success mt-3'><a href='../../views/auth/register-product.html' class='text-white' style='text-decoration: none;'>Agregar animal a la tabla</a></button>";
     } else {
         echo "<div class='alert alert-info'>No hay animales en la tienda</div>";
     }

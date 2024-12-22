@@ -131,10 +131,10 @@ class Admin extends Usuario {
                 echo "<td>" . htmlspecialchars($row["estado"]) . "</td>";
                 echo "<td>" . htmlspecialchars($row["privilegios"]) . "</td>";
                 echo "<td>" . htmlspecialchars($row["dinero"]) . "€" . "</td>";
-                echo "<td><a href='../../views/auth/block.php' class='btn btn-danger'>Bloquear</a></td>";
-                echo "<td><a href='../../views/auth/unblock.php' class='btn btn-success'>Desbloquear</a></td>";
-                echo "<td><a href='../../views/auth/modify_privileges.php' class='btn btn-primary'>Agregar</a></td>";
-                echo "<td><a href='../../views/auth/downgrade-privileges.php' class='btn btn-warning'>Degradar</a></td>";
+                echo "<td><a href='../../views/auth/block.html' class='btn btn-danger'>Bloquear</a></td>";
+                echo "<td><a href='../../views/auth/unblock.html' class='btn btn-success'>Desbloquear</a></td>";
+                echo "<td><a href='../../views/auth/modify_privileges.html' class='btn btn-primary'>Agregar</a></td>";
+                echo "<td><a href='../../views/auth/downgrade-privileges.html' class='btn btn-warning'>Degradar</a></td>";
                 echo "</tr>";
             }
             echo "</tbody>";
