@@ -128,7 +128,7 @@ public function animalesCliente() {
         echo "<th>Precio</th>";
         echo "<th>Stock</th>";
         echo "<th>Imagen</th>";
-        echo "<th>Comprar</th>";
+        echo "<th>Seleccionar</th>";
         echo "</tr>";
         echo "</thead>";
 
@@ -140,17 +140,20 @@ public function animalesCliente() {
             echo "<td>" . htmlspecialchars($fila["cantidad"]) . "</td>";
             echo "<td><img src='" . htmlspecialchars($fila["imagenes"]) . "' alt='" . htmlspecialchars($fila["nombre"]) . "' class='img-fluid' style='width: 100px; height: 100px; object-fit: contain;'></td>";
             echo "<td>";
+            echo "<input type='checkbox' name='productos[]' value='" . htmlspecialchars($fila["nombre"]) . "|" . htmlspecialchars($fila["precio"]) . "'> Seleccionar";
             echo "<input type='number' name='cantidades[" . htmlspecialchars($fila["nombre"]) . "]' value='1' min='1' max='" . htmlspecialchars($fila["cantidad"]) . "' class='form-control mb-2'>";
-            echo "<button type='submit' name='producto' value='" . htmlspecialchars($fila["nombre"]) . "|" . htmlspecialchars($fila["precio"]) . "' class='btn btn-primary'>Comprar</button>";
             echo "</td>";
             echo "</tr>";
         }
         echo "</tbody>";
         echo "</table>";
+        echo "<div class='text-center mt-3'>";
+        echo "<button type='submit' name='accion' value='agregar' class='btn btn-success'>Añadir seleccionados a la cesta</button>";
+        echo "</div>";
         echo "</form>";
 
-        if (isset($_POST['producto'])) {
-            $this->cesta();
+        if (isset($_POST['accion']) && $_POST['accion'] === 'agregar') {
+            $this->agregarACesta();
         }
         
     } else {
@@ -158,46 +161,62 @@ public function animalesCliente() {
     }
 }
 
-public function cesta() {
-    if (isset($_POST['producto'])) {
-        list($nombre, $precio) = explode('|', $_POST['producto']);
-        $cantidad = isset($_POST['cantidades'][$nombre]) ? (int)$_POST['cantidades'][$nombre] : 1;
+public function agregarACesta() {
+    if (isset($_POST['productos'])) {
+        foreach ($_POST['productos'] as $producto) {
+            $producto_info = explode("|", $producto);
+            $nombre = $producto_info[0];
+            $precio = (float)$producto_info[1];
+            $cantidad = (int)$_POST['cantidades'][$nombre];
 
-        if (!isset($_SESSION['cesta'])) {
-            $_SESSION['cesta'] = [];
-        }
+            if (!isset($_SESSION['cesta'])) {
+                $_SESSION['cesta'] = [];
+            }
 
-        $found = false;
-        foreach ($_SESSION['cesta'] as &$item) {
-            if ($item['nombre'] == $nombre) {
-                $item['cantidad'] += $cantidad;
-                $found = true;
-                break;
+            if (isset($_SESSION['cesta'][$nombre])) {
+                $_SESSION['cesta'][$nombre]['cantidad'] += $cantidad;
+            } else {
+                $_SESSION['cesta'][$nombre] = [
+                    'precio' => $precio,
+                    'cantidad' => $cantidad
+                ];
             }
         }
+        echo "<div class='alert alert-success'>Productos añadidos a la cesta</div>";
+    }
+}
 
-        if (!$found) {
-            $_SESSION['cesta'][] = ['nombre' => $nombre, 'precio' => $precio, 'cantidad' => $cantidad];
-        }
-
+public function mostrarCesta() {
+    if (!empty($_SESSION['cesta'])) {
+        echo "<h3>Tu Cesta</h3>";
+        echo "<table class='table table-bordered'>";
+        echo "<tr><th>Producto</th><th>Precio</th><th>Cantidad</th><th>Total</th><th>Acción</th></tr>";
         $total = 0;
-        echo "<h2>Cesta</h2>";
-        echo "<ul class='list-group'>";
-        foreach ($_SESSION['cesta'] as $item) {
-            $subtotal = $item['precio'] * $item['cantidad'];
-            echo "<li class='list-group-item d-flex justify-content-between align-items-center'>";
-            echo htmlspecialchars($item['nombre']) . " - " . htmlspecialchars($item['precio']) . "€ x " . htmlspecialchars($item['cantidad']) . " = " . htmlspecialchars($subtotal) . "€";
-            echo "</li>";
+        foreach ($_SESSION['cesta'] as $nombre => $producto) {
+            $subtotal = $producto['precio'] * $producto['cantidad'];
             $total += $subtotal;
+            echo "<tr>";
+            echo "<td>" . htmlspecialchars($nombre) . "</td>";
+            echo "<td>" . number_format($producto['precio'], 2) . "€</td>";
+            echo "<td>" . $producto['cantidad'] . "</td>";
+            echo "<td>" . number_format($subtotal, 2) . "€</td>";
+            echo "<td><form method='post'><button type='submit' name='eliminar' value='" . htmlspecialchars($nombre) . "'>Eliminar</button></form></td>";
+            echo "</tr>";
         }
-        echo "</ul>";
-        echo "<h3 class='mt-3'>Total: " . htmlspecialchars($total) . "€</h3>";
+        echo "<tr><td colspan='3'><strong>Total</strong></td><td colspan='2'>" . number_format($total, 2) . "€</td></tr>";
+        echo "</table>";
+
+        if (isset($_POST['eliminar'])) {
+            unset($_SESSION['cesta'][$_POST['eliminar']]);
+            echo "<div class='alert alert-warning'>Producto eliminado de la cesta</div>";
+        }
     } else {
-        echo "<h2>Cesta</h2>";
-        echo "<p>No hay productos en la cesta</p>";
+        echo "<div>Tu cesta está vacía</div>";
     }
 }
 
 }
+
+
 
 ?>

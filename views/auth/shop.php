@@ -11,7 +11,8 @@
     <div class="container mt-5">
         <h1 class="text-center mb-4">Bienvenido a la tienda de animales</h1>
         <div class="d-flex justify-content-center mb-3">
-            <a href="../client/client_panel.php" class="btn btn-warning">Zona cliente</a>
+            <a href="../client/client_panel.php" class="btn btn-warning me-2">Zona cliente</a>
+            <a href="#cesta" class="btn btn-info">Ver Cesta</a>
         </div>
         
         <h2 class="text-center mb-4">Animales en la tienda</h2>
@@ -21,6 +22,11 @@
         $producto->animalesCliente();
         ?>
 
+        <h2 id="cesta" class="text-center mt-5 mb-4">🛒 Tu Cesta</h2>
+        <?php
+        $producto->mostrarCesta();
+        ?>
+
         <h2 class="text-center mt-5 mb-4">Nuestras valoraciones</h2>
         <?php
         include("../../php/backend/user.php");
@@ -28,7 +34,7 @@
         $valoraciones->devolverValoraciones();
         ?>
         <div class="d-flex justify-content-center mt-4">
-            <a href="../auth/valoration.html" class="btn btn-success">Añade tu valoracion web</a>
+            <a href="../auth/valoration.html" class="btn btn-success">Añade tu valoración web</a>
         </div>
         
     </div>
